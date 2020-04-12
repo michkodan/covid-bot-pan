@@ -46,6 +46,7 @@ def get_message(message):
                               f"<b>Подтверждено:</b> {item['confirmed']}\n"\
                               f"<b>Умерло:</b> {item['dead']}\n"\
                               f"<b>Выздоровело:</b> {item['recovered']}"
+        bot.send_message(message.chat.id, get_message, parse_mode='html')
 
     if get_message == 'Хабаровск':
         for item in result_cities['data']:
@@ -54,6 +55,7 @@ def get_message(message):
                               f"<b>Подтверждено:</b> {item['confirmed']}\n"\
                               f"<b>Умерло:</b> {item['dead']}\n"\
                               f"<b>Выздоровело:</b> {item['recovered']}"
+        bot.send_message(message.chat.id, get_message, parse_mode='html')
 
     if get_message == 'Москва':
         for item in result_cities['data']:
@@ -62,6 +64,7 @@ def get_message(message):
                               f"<b>Подтверждено:</b> {item['confirmed']}\n"\
                               f"<b>Умерло:</b> {item['dead']}\n"\
                               f"<b>Выздоровело:</b> {item['recovered']}"
+        bot.send_message(message.chat.id, get_message, parse_mode='html')
 
     if get_message == 'Во всей России':
         for item in result_countries['data']:
@@ -70,12 +73,12 @@ def get_message(message):
                               f"<b>Подтверждено:</b> {item['confirmed']}\n"\
                               f"<b>Умерло:</b> {item['dead']}\n"\
                               f"<b>Выздоровело:</b> {item['recovered']}"
+        bot.send_message(message.chat.id, get_message, parse_mode='html')
 
     else:
         bot.send_message(message.chat.id,
                          f'<b>{message.from_user.first_name}</b>, так-так, не нужно писать текст, пользуйся кнопками!',
                          parse_mode='html')
-    bot.send_message(message.chat.id, get_message, parse_mode='html')
 
 
 if __name__ == '__main__':
