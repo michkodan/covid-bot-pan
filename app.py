@@ -75,10 +75,10 @@ def get_message(message):
                               f"<b>Выздоровело:</b> {item['recovered']}"
         bot.send_message(message.chat.id, get_message, parse_mode='html')
 
-    else:
-        bot.send_message(message.chat.id,
-                         f'<b>{message.from_user.first_name}</b>, так-так, не нужно писать текст, пользуйся кнопками!',
-                         parse_mode='html')
+    # else:
+    #     bot.send_message(message.chat.id,
+    #                      f'<b>{message.from_user.first_name}</b>, так-так, не нужно писать текст, пользуйся кнопками!',
+    #                      parse_mode='html')
 
 
 if __name__ == '__main__':
