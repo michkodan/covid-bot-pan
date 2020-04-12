@@ -1,10 +1,10 @@
 import requests
 import json
 import telebot
-from telebot import apihelper
+# from telebot import apihelper
 from telebot import types
 
-apihelper.proxy = {'https': 'socks5h://185.153.198.226:50210'}
+# apihelper.proxy = {'https': 'socks5h://185.153.198.226:50210'}
 
 bot = telebot.TeleBot('1103844740:AAFOTC9I4JJvh8Yg5lYOJXvjztV9YQ3f62U')
 
