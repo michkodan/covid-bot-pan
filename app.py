@@ -9,8 +9,8 @@ apihelper.proxy = {'https': 'socks5h://185.153.198.226:50210'}
 bot = telebot.TeleBot('1103844740:AAFOTC9I4JJvh8Yg5lYOJXvjztV9YQ3f62U')
 
 url_cities = 'https://www.trackcorona.live/api/cities/'
-response_cities = requests.request("GET", url_cities)
-result_cities = response_cities.json()
+response_cities = requests.request("GET", url_cities).json()
+# result_cities = response_cities.json()
 
 url_countries = 'https://www.trackcorona.live/api/countries/'
 response_countries = requests.request("GET", url_countries)
@@ -40,7 +40,7 @@ def get_message(message):
             return bot.send_sticker(message.chat.id, f, timeout=50).sticker
 
     if get_message == 'Санкт-Петербург':
-        for item in result_cities['data']:
+        for item in response_cities['data']:
             if item['location'] == 'Saint Petersburg':
                 get_message = f"<u>Данные по городу:</u>\n"\
                               f"<b>Подтверждено:</b> {item['confirmed']}\n"\
@@ -49,7 +49,7 @@ def get_message(message):
         bot.send_message(message.chat.id, get_message, parse_mode='html')
 
     if get_message == 'Хабаровск':
-        for item in result_cities['data']:
+        for item in response_cities['data']:
             if item['location'] == 'Khabarovsk Krai':
                 get_message = f"<u>Данные по городу:</u>\n"\
                               f"<b>Подтверждено:</b> {item['confirmed']}\n"\
@@ -58,7 +58,7 @@ def get_message(message):
         bot.send_message(message.chat.id, get_message, parse_mode='html')
 
     if get_message == 'Москва':
-        for item in result_cities['data']:
+        for item in response_cities['data']:
             if item['location'] == 'Moscow':
                 get_message = f"<u>Данные по городу:</u>\n"\
                               f"<b>Подтверждено:</b> {item['confirmed']}\n"\
