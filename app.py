@@ -1,18 +1,18 @@
 import requests
 import json
 import telebot
-from telebot import apihelper
+# from telebot import apihelper
 from telebot import types
 
-apihelper.proxy = {'https': 'socks5h://185.153.198.226:50210'}
+# apihelper.proxy = {'https': 'socks5h://185.153.198.226:50210'}
 
 bot = telebot.TeleBot('1103844740:AAFOTC9I4JJvh8Yg5lYOJXvjztV9YQ3f62U')
 
-url_cities = 'https://www.trackcorona.live/api/cities/'
-response_cities = requests.request("GET", url_cities).json()
-# result_cities = response_cities.json()
+url_cities = 'https://www.trackcorona.live/api/cities'
+response_cities = requests.request("GET", url_cities)
+result_cities = response_cities.json()
 
-url_countries = 'https://www.trackcorona.live/api/countries/'
+url_countries = 'https://www.trackcorona.live/api/countries'
 response_countries = requests.request("GET", url_countries)
 result_countries = response_countries.json()
 
@@ -40,7 +40,7 @@ def get_message(message):
             return bot.send_sticker(message.chat.id, f, timeout=50).sticker
 
     if get_message == 'Санкт-Петербург':
-        for item in response_cities['data']:
+        for item in result_cities['data']:
             if item['location'] == 'Saint Petersburg':
                 get_message = f"<u>Данные по городу:</u>\n"\
                               f"<b>Подтверждено:</b> {item['confirmed']}\n"\
@@ -49,7 +49,7 @@ def get_message(message):
         bot.send_message(message.chat.id, get_message, parse_mode='html')
 
     if get_message == 'Хабаровск':
-        for item in response_cities['data']:
+        for item in result_cities['data']:
             if item['location'] == 'Khabarovsk Krai':
                 get_message = f"<u>Данные по городу:</u>\n"\
                               f"<b>Подтверждено:</b> {item['confirmed']}\n"\
@@ -58,7 +58,7 @@ def get_message(message):
         bot.send_message(message.chat.id, get_message, parse_mode='html')
 
     if get_message == 'Москва':
-        for item in response_cities['data']:
+        for item in result_cities['data']:
             if item['location'] == 'Moscow':
                 get_message = f"<u>Данные по городу:</u>\n"\
                               f"<b>Подтверждено:</b> {item['confirmed']}\n"\
@@ -80,14 +80,6 @@ def get_message(message):
     #                      f'<b>{message.from_user.first_name}</b>, так-так, не нужно писать текст, пользуйся кнопками!',
     #                      parse_mode='html')
 
-@bot.inline_handler(lambda query: query.query == 'text')
-def query_text(inline_query):
-    try:
-        r = types.InlineQueryResultArticle('1', 'Result1', types.InputTextMessageContent('hi'))
-        r2 = types.InlineQueryResultArticle('2', 'Result2', types.InputTextMessageContent('hi'))
-        bot.answer_inline_query(inline_query.id, [r, r2])
-    except Exception as e:
-        print(e)
 
 if __name__ == '__main__':
     bot.infinity_polling(none_stop=True)
